@@ -58,7 +58,7 @@
   </style>
 </head>
 <body>
-  <img src="A_2D_digital_illustration_of_a_friendly_robot_char.png" alt="Cute Robot" />
+  <img src="A_2D_digital_illustsrcration_of_a_friendly_robot_char.png" alt="Cute Robot" />
   <select id="scenario">
     <option value="">Select a practice topic...</option>
     <option value="Let's practice speaking at the airport.">✈️ At the Airport</option>
@@ -97,12 +97,9 @@
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
         headers: {
-          headers: {
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer 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',
-  'OpenAI-Organization': 'org-Vdqyx8y5y2EPQZkpRZJDf3iI'
-},
-
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer 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',
+          'OpenAI-Organization': 'org-Vdqyx8y5y2EPQZkpRZJDf3iI'
         },
         body: JSON.stringify({
           model: 'gpt-4',
