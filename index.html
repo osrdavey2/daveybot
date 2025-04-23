@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -95,16 +95,16 @@
 
   async function fetchGPT(message) {
     try {
-const response = await fetch('https://chatgpt-proxy-server.vercel.app/api/chat', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          model: 'gpt-3.5-turbo',  // GPT-4 not supported here
-          messages: [{ role: 'user', content: message }]
-        })
-      });
+const response = await fetch('https://gptproxy.deno.dev/chat', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    model: 'gpt-3.5-turbo',
+    messages: [{ role: 'user', content: message }]
+  })
+});
 
       const data = await response.json();
       console.log(data);
@@ -117,25 +117,6 @@ const response = await fetch('https://chatgpt-proxy-server.vercel.app/api/chat',
       addMessage("Sorry, I couldn't reach the brain. Try again!", 'robot');
     }
   }
-
-    // async function fetchGPT(message) {
-    //   const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': 'Bearer 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',
-    //       'OpenAI-Organization': 'org-Vdqyx8y5y2EPQZkpRZJDf3iI'
-    //     },
-    //     body: JSON.stringify({
-    //       model: 'gpt-4',
-    //       messages: [{ role: 'user', content: message }]
-    //     })
-    //   });
-    //   const data = await response.json();
-    //   const reply = data.choices[0].message.content;
-    //   addMessage(reply, 'robot');
-    //   speak(reply);
-    // }
 
     function addMessage(text, sender) {
       const div = document.createElement('div');
@@ -170,48 +151,4 @@ const response = await fetch('https://chatgpt-proxy-server.vercel.app/api/chat',
   </script>
 </body>
 </html>
- -->
 
-
- <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Chat with OpenAI</title>
-</head>
-<body>
-  <h2>OpenAI Chat + Speech</h2>
-  <input type="text" id="userInput" placeholder="Ask something..." style="width:300px;">
-  <button onclick="sendToOpenAI()">Send</button>
-  <p><strong>Response:</strong> <span id="responseText"></span></p>
-
-  <script>
-    const API_KEY = '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';
-
-    async function sendToOpenAI() {
-      const input = document.getElementById('userInput').value;
-      const responseElem = document.getElementById('responseText');
-
-      const res = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${API_KEY}`
-        },
-        body: JSON.stringify({
-          model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: input }]
-        })
-      });
-
-      const data = await res.json();
-      const reply = data.choices[0].message.content;
-      responseElem.textContent = reply;
-
-      // Speak the reply
-      const utterance = new SpeechSynthesisUtterance(reply);
-      speechSynthesis.speak(utterance);
-    }
-  </script>
-</body>
-</html>
